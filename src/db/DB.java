@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection; //import do java.sql
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class DB {
@@ -49,5 +51,28 @@ public class DB {
 			throw new DbException(erro.getMessage()); //Baseada na Classe de exceção criada
 		}
 	}
+	
+	//tratar exceções do Statement, que está na classe Program
+	public static void fecharStatement(Statement statementSQL) {
+		if(statementSQL != null) {
+			try {
+				statementSQL.close();
+			} catch (SQLException erro) {
+				throw new DbException(erro.getMessage()); //Baseada na Classe de exceção criada
+			}
+		}
+	}
+	
+	//tratar exceções do ResultSet, que está na classe Program
+	public static void fecharResultSet(ResultSet resultSet) {
+		if(resultSet != null) {
+			try {
+				resultSet.close();
+			} catch (SQLException erro) {
+				throw new DbException(erro.getMessage()); //Baseada na Classe de exceção criada
+			}
+		}
+	}
+
 
 }
